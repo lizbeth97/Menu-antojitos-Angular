@@ -23,11 +23,15 @@ export class PlatillosComponent implements OnInit {
 
  platillos: Platillo[];
  search: String;
-
+id:String;
   constructor(private service: PlatilloService,
     private excelService: ExcelService,
     private route: ActivatedRoute) {
-
+      this.route.queryParams.subscribe(res=>{
+        console.log('dsa');
+       console.log(res)
+       this.id = res['id'];
+     });
     this.platillo = new Platillo();
      this.getPlatillos();
      console.log('object');
@@ -40,7 +44,7 @@ export class PlatillosComponent implements OnInit {
 
   getPlatillos(){
 
-    this.service.getPlatillos().subscribe(res => {
+    this.service.getPlatillos(this.id).subscribe(res => {
       this.platillos = res as Platillo[];
     });
   }
@@ -48,7 +52,7 @@ export class PlatillosComponent implements OnInit {
   addPlatillo(form: NgForm)
   {
       console.log(form.value);
-      this.service.postPlatillo(form.value).subscribe(arg =>
+      this.service.postPlatillo(this.id,form.value).subscribe(arg =>
         {
           this.getPlatillos();
           console.log(arg);

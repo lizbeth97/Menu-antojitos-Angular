@@ -4,8 +4,6 @@ import { Router, NavigationExtras } from '@angular/router';
 
 import * as jsPDF from 'jspdf';
 
-import { from } from 'rxjs';
-
 import { Categoria } from '../../module/categoria';
 import { CategoriaService } from './../../services/categoria.service';
 import {ExcelService} from './../../services/excel.service';
@@ -112,5 +110,31 @@ getCategorias(){
     };
     this.router.navigate(['platillos'], navigationExtras);
   }
+  status(value,form:NgForm)  {
+    console.log(`hola ${value}`);
+    let newCategoria = new Categoria()
+    newCategoria = value as Categoria;
+    if(newCategoria.blnStatus==true){
+      newCategoria.blnStatus = false;
+    }else{
+    newCategoria.blnStatus = true;
+    }
+
+    console.log(newCategoria);
+    this.service.putCategoria(newCategoria).subscribe(res=>{
+      console.log(res);
+      this.getCategorias();
+     });
+
+  }
+  goto(item:Categoria){
+    let navigationExtras:NavigationExtras={
+      queryParams: {
+        'id' : item._id
+      }
+    }
+    this.router.navigate(['platillos'],navigationExtras)
+  }
+
 
 }

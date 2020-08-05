@@ -62,10 +62,15 @@
                                 <i class="fas fa-ellipsis-h"></i>
                               </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" (click)="saveCategoria(item)"><i class="fas fa-edit"></i>&nbsp;Editar</a>
-                                    <a class="dropdown-item"><i class="far fa-check-square"></i>&nbsp;Activar/desactivar</a>
-                                    <hr>
-                                    <a class="dropdown-item" [routerLink]="['/platillos', item._id]"><i class="fas fa-cogs"></i>&nbsp;Gestionar paltillos</a>
+                                    <div *ngIf="item.blnStatus == true">
+                                        <a class="dropdown-item" (click)="saveCategoria(item)"><i class="fas fa-edit"  ></i>&nbsp;Editar</a>
+
+                                    </div>
+                                    <a class="dropdown-item"><i (click)="status(item)" class="far fa-check-square"></i>&nbsp;Activar/desactivar</a>
+                                    <hr *ngIf="item.blnStatus == true">
+                                    <div *ngIf="item.blnStatus == true">
+                                        <a class="dropdown-item" (click)="goto(item)"><i class="fas fa-cogs"></i>&nbsp;Gestionar paltillos</a>
+                                    </div>
                                 </div>
                             </td>
                         </tr>

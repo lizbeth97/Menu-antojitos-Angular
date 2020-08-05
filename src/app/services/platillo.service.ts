@@ -14,14 +14,14 @@ export class PlatilloService {
 
   url = 'http://localhost:3000';
 
-  getPlatillos(): Observable<Platillo[]>
+  getPlatillos(id): Observable<Platillo[]>
   {
-    return this.http.get<Platillo[]>(`${this.url}/platillo`);
+    return this.http.get<Platillo[]>(`${this.url}/platillo/${id}`);
   }
 
-  postPlatillo(platillo: Platillo)
+  postPlatillo(id,platillo: Platillo)
   {
-    return this.http.post(`${this.url}/platillo`, platillo);
+    return this.http.post(`${this.url}/platillo/${id}`, platillo);
   }
 
   putPlatillo(platillo: Platillo){
