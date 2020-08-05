@@ -6,7 +6,7 @@ import { PlatillosComponent } from './components/platillos/platillos.component';
 
 const routes: Routes = [
   {path: 'categoria' , component: CategoriasComponent },
-  {path: 'platillos/:idCategoria' , component: PlatillosComponent },
+  {path: 'platillos/:id' , component: PlatillosComponent },
   {path: '**' , pathMatch: 'full' , redirectTo: 'categoria' }
 ];
 

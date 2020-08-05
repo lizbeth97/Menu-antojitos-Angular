@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router, NavigationExtras } from '@angular/router';
 
 import * as jsPDF from 'jspdf';
 
@@ -26,7 +27,7 @@ export class CategoriasComponent implements OnInit {
  lista: Categoria[];
  search: String;
 
-  constructor(private service: CategoriaService, private excelService: ExcelService) {
+  constructor(private service: CategoriaService, private excelService: ExcelService, private router:Router) {
     this.categoria = new Categoria();
    }
 
@@ -102,6 +103,14 @@ getCategorias(){
 
   downloadExcel(){
       this.excelService.exportToExcel(this.lista, 'categorias');
+  }
+  goToGestionar(categoriaSelecionada){
+      let navigationExtras:NavigationExtras = {
+      queryParams: {
+        "categoria": "gdf"
+      }
+    };
+    this.router.navigate(['platillos'], navigationExtras);
   }
 
 }

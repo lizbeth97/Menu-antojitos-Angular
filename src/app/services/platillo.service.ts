@@ -27,4 +27,8 @@ export class PlatilloService {
   putPlatillo(platillo: Platillo){
     return this.http.put(`${this.url}/platillo/${platillo._id}`, platillo);
   }
+
+  getPlatillosCategoria(platillo: Platillo): Observable<Platillo[]>{
+    return this.http.get<Platillo[]>(`${this.url}/platillo/${platillo.idCategoria}, platillo`);
+  }
 }

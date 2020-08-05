@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import  Swal  from 'sweetalert2';
 
 import * as jsPDF from 'jspdf';
 
@@ -27,9 +30,11 @@ export class PlatillosComponent implements OnInit {
 
     this.platillo = new Platillo();
      this.getPlatillos();
-   }
+     console.log('object');
+    }
 
   ngOnInit(): void {
+
   }
 
 
@@ -47,8 +52,18 @@ export class PlatillosComponent implements OnInit {
         {
           this.getPlatillos();
           console.log(arg);
+          Swal.fire({
+            icon: 'success',
+            text: 'Platillo registrado'
+          });
           form.reset();
-        });
+        }, (err: HttpErrorResponse) => {
+          console.log(err);
+           Swal.fire({
+             icon: 'error',
+             text: err.error.err.message
+           });
+         });
 
   }
 
@@ -68,6 +83,10 @@ export class PlatillosComponent implements OnInit {
   {
     console.log(value);
     this.platillo = value as Platillo;
+  }
+
+  platillosByCategoria(){
+   // this.service.getPlatillosCategoria();
   }
 
   exportExcel(){
