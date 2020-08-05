@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+.titulo {
+    text-align: center;
+}
+
+.subtitulo {
+    text-align: center;
+}
+
+.container-fluid {
+    padding: 60px 50px;
+    margin: 10px;
+    top: auto;
+}
+
+.bg-grey {
+    background-color: #f6f6f6;
+}
+
+hr {
+    border-color: black;
+    width: 100%;
+    border-width: 1.5px;
+}
+
+textarea {
+    width: 100%;
+}
+
+.container {
+    height: 22.5rem;
+}
+
+table {
+    text-align: left;
+    position: relative;
+    border-collapse: collapse;
+}
+
+th {
+    background: rgb(102, 184, 26);
+    position: sticky;
+    top: 0;
+    /* Don't forget this, required for the stickiness */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}

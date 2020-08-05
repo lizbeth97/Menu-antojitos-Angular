@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { CategoriasComponent } from './components/categorias/categorias.component';
+import { PlatillosComponent } from './components/platillos/platillos.component';
+
+const routes: Routes = [
+  {path: 'categoria' , component: CategoriasComponent },
+  {path: 'platillos/:idCategoria' , component: PlatillosComponent },
+  {path: '**' , pathMatch: 'full' , redirectTo: 'categoria' }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,97 @@
+<div class="container-fluid bg-grey">
+    <div class="row">
+
+        <div class="col-sm-5 formulario">
+            <h2 class="text-center">Registro de platillos</h2>
+            <hr>
+
+            <form #formPlatillo="ngForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="strNombre" required name="strNombre" [(ngModel)]="platillo.strNombre" #strNombre="ngModel" placeholder="Nombre del platillo">
+                </div>
+                <div class="form-group">
+                    <textarea id="strDescipcion" name="strDescripcion" class="md-textarea form-control" [(ngModel)]="platillo.strDescripcion" #strDescripcion="ngModel" rows="3" placeholder="Descripción"></textarea>
+                </div>
+                <div class="form-group">
+                    <textarea id="strIngredientes" name="strIngredientes" class="md-textarea form-control" [(ngModel)]="platillo.strIngredientes" #strIngredientes="ngModel" rows="3" placeholder="Ingredientes"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="nmbPiezas" required name="nmbPiezas" [(ngModel)]="platillo.nmbPiezas" #nmbPiezas="ngModel" placeholder="Numero de piezas">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" id="nmbPrecio" required name="nmbPrecio" [(ngModel)]="platillo.nmbPrecio" #nmbPrecio="ngModel" placeholder="Precio">
+                </div>
+                <button type="reset" class="btn btn-danger col-5 cancelar">Cancelar</button> &nbsp;
+                <button type="submit" class="btn btn-success col-5 registrar" *ngIf="platillo._id == undefined" (click)="addPlatillo(formPlatillo)">Registrar</button>
+
+                <button type="submit" class="btn btn-success col-5 registrar" *ngIf="platillo._id != undefined" (click)="editPlatillo(platillo,formPlatillo )">Editar</button>
+            </form>
+
+        </div>
+        <br>
+        <div class="col-sm-7 tabla ">
+            <div class="input-group mb-3 ">
+                <input type="text " class="form-control " placeholder="Buscar... " aria-describedby="basic-addon2 " [(ngModel)]="search">&nbsp;&nbsp;
+                <button class="btn btn-outline-danger " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-h"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="exportExcel()"><i class="far fa-file-excel"></i>&nbsp;Excel</a>
+                    <a class="dropdown-item" type="button" value="Descargar PDF" (click)="exportPdf()"><i class="far fa-file-pdf"></i>&nbsp;PDF</a>
+                </div>
+            </div>
+            <br>
+            <div hidden id="content " #content>
+                <table class="table table-bordered " id="table ">
+                    <tr class="table-primary ">
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Ingredientes</th>
+                        <th>Piezas</th>
+                        <th>Precio</th>
+                    </tr>
+                    <tr *ngFor="let item of platillos ">
+                        <td>{{item.strNombre}}</td>
+                        <td>{{item.strDescripcion}}</td>
+                        <td>{{item.strIngredientes}}</td>
+                        <td>{{item.nmbPiezas}}</td>
+                        <td>{{item.nmbPrecio}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container " #scrollMe style="overflow: scroll; height: xyz; ">
+                <table class="table ">
+                    <thead class="thead ">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Ingredientes</th>
+                            <th>Piezas</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body ">
+                        <tr *ngFor="let item of platillos | platilloFilter:search ">
+                            <td>{{item.strNombre}}</td>
+                            <td>{{item.strDescripcion}}</td>
+                            <td>{{item.strIngredientes}}</td>
+                            <td>{{item.nmbPiezas}}</td>
+                            <td>{{item.nmbPrecio}}</td>
+                            <td>
+                                <button class="btn btn-outline-success " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" (click)="platillosEdit(item)"><i class="fas fa-edit"></i>&nbsp;Editar</a>
+                                    <a class="dropdown-item"><i class="far fa-check-square"></i>&nbsp;Activar/desactivar</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
